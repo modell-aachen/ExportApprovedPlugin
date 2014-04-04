@@ -1,0 +1,5 @@
+!noci
+data/System/ExportApprovedPlugin.txt 0644 Plugin doc page
+lib/Foswiki/Plugins/ExportApprovedPlugin/Config.spec 0644 Configuration spec file
+lib/Foswiki/Plugins/ExportApprovedPlugin.pm 0644 Plugin Perl module
+tools/generate-approved-pdfs 0755 Companion script to call from cronjobs etc.
