@@ -1,1 +1,1 @@
-Foswiki::Contrib::MAPrinceModPlugin,>=0,perl,Required.
+Foswiki::Plugins::MAPrinceModPlugin,>=0,perl,Required.
