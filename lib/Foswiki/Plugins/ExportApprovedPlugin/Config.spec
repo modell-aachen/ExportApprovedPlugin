@@ -13,12 +13,12 @@ $Foswiki::cfg{ExportApprovedPlugin}{OutputNameTemplate} = '$Foswiki::cfg{Working
 # This can be used to add metadata files that are put alongside the PDF files.
 $Foswiki::cfg{ExportApprovedPlugin}{ExtraFiles} = {};
 
-# **REGEX**
+# **STRING**
 # Any web.topic that matches this regular expression will be skipped.
-$Foswiki::cfg{ExportApprovedPlugin}{SkipTopics} = qr#^(?:Sandbox|Main|System)\./#;
+$Foswiki::cfg{ExportApprovedPlugin}{SkipTopics} = '^(?:Sandbox|Main|System)\./';
 
 # **PERL H**
-$Foswiki::cfg{SwitchBoard}{generate-approved-pdfs} = {
+$Foswiki::cfg{SwitchBoard}{'generate-approved-pdfs'} = {
     package => 'Foswiki::Plugins::ExportApprovedPlugin',
     function => '_generateApprovedPdfs',
     context => { 'generate-approved-pdfs' => 1 },
