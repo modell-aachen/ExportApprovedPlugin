@@ -148,6 +148,8 @@ sub _generateApprovedPdfs {
             print $mfh $mtmpl;
             Foswiki::Func::popTopicContext();
         }
+
+        unlink($fullfn);
     }
 }
 
