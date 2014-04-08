@@ -34,7 +34,6 @@ sub initPlugin {
     my $req = $session->{request};
     if ($req->action eq 'rest' && $req->path_info =~ m#/KVPPlugin/changeState#) {
         return 1 if $topic =~ /$Foswiki::cfg{ExportApprovedPlugin}{SkipTopics}/;
-        return 1 unless $topic =~ /$Foswiki::cfg{Extensions}{KVPPlugin}{suffix}$/;
         my ($meta, $text) = Foswiki::Func::readTopic($web, $topic);
         return 1 unless defined $meta;
         return 1 unless $meta->find('WORKFLOW');
