@@ -101,6 +101,7 @@ sub _generateApprovedPdfs {
     my $outpath = $cfg->{OutputNameTemplate};
 
     my $workarea = Foswiki::Func::getWorkArea('ExportApprovedPlugin');
+    chdir($Foswiki::cfg{ScriptDir});
     foreach my $fn (<$workarea/*>) {
         next if !-f $fn;
         my $fullfn = $fn;
@@ -121,7 +122,7 @@ sub _generateApprovedPdfs {
         $webSh = Foswiki::Sandbox::untaintUnchecked($webSh);
         $topicSh = Foswiki::Sandbox::untaintUnchecked($topicSh);
         $fullfn = Foswiki::Sandbox::untaintUnchecked($fullfn);
-        $pdfCmd .= " topic='$webSh.$topicSh' contenttype=application/pdf cover=print $(cat '$fullfn')";
+        $pdfCmd .= " topic='$webSh.$topicSh' contenttype=application/pdf cover=print \$(cat '$fullfn')";
         my $pdf = `$pdfCmd`;
 
         unless (defined $meta) {
