@@ -118,6 +118,9 @@ sub _generateApprovedPdfs {
 
         my $pdfCmd = "$Foswiki::cfg{ScriptDir}/view$Foswiki::cfg{ScriptSuffix}";
         $fullfn =~ s/'/'\\''/g;
+        $webSh = Foswiki::Sandbox::untaintUnchecked($webSh);
+        $topicSh = Foswiki::Sandbox::untaintUnchecked($topicSh);
+        $fullfn = Foswiki::Sandbox::untaintUnchecked($fullfn);
         $pdfCmd .= " topic='$webSh.$topicSh' contenttype=application/pdf cover=print $(cat '$fullfn')";
         my $pdf = `$pdfCmd`;
 
