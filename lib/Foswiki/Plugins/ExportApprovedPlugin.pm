@@ -88,7 +88,7 @@ sub finishPlugin {
 sub _applyParams {
     my ($template, $params) = @_;
     while (my ($k, $v) = each(%$params)) {
-        $template =~ s/\$\{\Q$k\E\}/$v/g;
+        $template =~ s/%\{\Q$k\E\}/$v/g;
     }
     $template;
 }
