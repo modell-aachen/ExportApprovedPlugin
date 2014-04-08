@@ -41,7 +41,7 @@ sub initPlugin {
         # It exists and it has workflow info; now all we need to check at this
         # point is whether the workflow action will approve the topic
         my $ct = Foswiki::Plugins::KVPPlugin::_initTOPIC($web, $topic, 99999,
-            $meta, $text);
+            $meta, $text, Foswiki::Plugins::KVPPlugin::FORCENEW);
         return 1 unless defined $ct;
         return 1 if $ct->getRow('approved'); # unlikely but let's check anyway
         my $nextState = $ct->haveNextState($req->param('WORKFLOWACTION'));
