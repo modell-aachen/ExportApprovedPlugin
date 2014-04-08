@@ -75,6 +75,7 @@ sub finishPlugin {
 
     my $ntopic = $topic; $ntopic =~ s/$Foswiki::cfg{Extensions}{KVPPlugin}{suffix}$//;
 
+    my ($meta, $text) = Foswiki::Func::readTopic($web, $ntopic);
     if ($ntopic eq $topic) {
         # Check whether draft got approved
         my $ct = Foswiki::Plugins::KVPPlugin::_initTOPIC($web, $topic, 99999,
@@ -84,7 +85,6 @@ sub finishPlugin {
     }
 
     # Make sure export is activated in new version
-    my ($meta) = Foswiki::Func::readTopic($web, $ntopic);
     return if !$meta->getPreference('EXPORT_AS_PDF');
 
     my $landscape = $meta->getPreference('PDF_LANDSCAPE') || '0';
