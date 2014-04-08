@@ -63,16 +63,27 @@ sub finishPlugin {
 
     undef $topicOfInterest;
 
-    return if Foswiki::Func::topicExists($web, $topic);
+    # Previous version had TALK suffix and is still there = changeState must have failed somehow
+    return if $topic =~ /$Foswiki::cfg{Extensions}{KVPPlugin}{suffix}$/ && Foswiki::Func::topicExists($web, $topic);
 
-    # The original topic had WORKFLOWSUFFIX; now it's gone. We already checked
-    # that the transition was one that approves the topic, so we can (almost)
-    # safely conclude that the topic was approved successfully.
+    # At this point, if we came from a TALK topic we "know" the transition
+    # succeeded because the TALK topic is gone.
+    # If we came from a non-TALK topic we need to verify the topic is now
+    # approved; that's the only way to tell whether the transition was successful.
 
     # XXX: may want to check whether the workflow rev increased, too
 
+    my $ntopic = $topic; $ntopic =~ s/$Foswiki::cfg{Extensions}{KVPPlugin}{suffix}$//;
+
+    if ($ntopic eq $topic) {
+        # Check whether draft got approved
+        my $ct = Foswiki::Plugins::KVPPlugin::_initTOPIC($web, $topic, 99999,
+            $meta, $text); # okay to get this one from cache
+        return unless defined $ct;
+        return unless $ct->getRow('approved');
+    }
+
     # Make sure export is activated in new version
-    my ($ntopic) = ($topic =~ /^(.*)$Foswiki::cfg{Extensions}{KVPPlugin}{suffix}$/);
     my ($meta) = Foswiki::Func::readTopic($web, $ntopic);
     return if !$meta->getPreference('EXPORT_AS_PDF');
 
