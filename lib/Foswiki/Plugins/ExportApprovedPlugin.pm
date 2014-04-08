@@ -11,6 +11,9 @@ use Foswiki::Sandbox ();
 
 use Foswiki::Plugins::KVPPlugin ();
 
+use File::Path;
+use File::Spec;
+
 use version;
 our $VERSION = '0.0.1';
 our $RELEASE = '0.0.1';
@@ -137,6 +140,8 @@ sub _generateApprovedPdfs {
             $params->{$field->{name}} = $field->{value};
         }
         my $curpath = _applyParams($outpath, $params);
+        my ($volume, $dirpart) = File::Spec->splitpath($curpath);
+        File::Path::make_path($volume.$dirpart);
         open(my $fh, '>', $curpath) or die "Can't open $curpath for writing: $!";
         print $fh $pdf;
 
@@ -145,6 +150,8 @@ sub _generateApprovedPdfs {
             $mtmpl = Foswiki::Func::loadTemplate($mtmpl);
             $mtmpl = Foswiki::Func::expandCommonVariables($mtmpl, $web, $topic, $meta);
             $mfn = _applyParams($mfn, $params);
+            ($volume, $dirpart) = File::Spec->splitpath($mfn);
+            File::Path::make_path($volume.$dirpart);
             open(my $mfh, '>', $mfn) or die "Can't open $mfn for writing: $!";
             print $mfh $mtmpl;
             Foswiki::Func::popTopicContext();
