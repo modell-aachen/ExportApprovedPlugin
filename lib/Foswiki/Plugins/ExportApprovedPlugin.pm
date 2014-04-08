@@ -122,7 +122,6 @@ sub _generateApprovedPdfs {
         $pdfCmd .= " topic='$webSh.$topicSh' contenttype=application/pdf cover=print $(cat '$fullfn')";
         my $pdf = `$pdfCmd`;
 
-        my ($meta) = Foswiki::Func::readTopic($web, $topic);
         unless (defined $meta) {
             print STDERR "Couldn't read metadata for $web.$topic, skipping...\n";
             next;
