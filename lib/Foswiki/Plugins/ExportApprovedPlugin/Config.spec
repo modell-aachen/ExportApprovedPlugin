@@ -14,6 +14,10 @@ $Foswiki::cfg{ExportApprovedPlugin}{OutputNameTemplate} = '$Foswiki::cfg{Working
 $Foswiki::cfg{ExportApprovedPlugin}{ExtraFiles} = {};
 
 # **STRING**
+# The character encoding to use for extra files being generated.
+$Foswiki::cfg{ExportApprovedPlugin}{ExtraFilesCharSet} = 'windows-1252';
+
+# **STRING**
 # Any web.topic that matches this regular expression will be skipped.
 $Foswiki::cfg{ExportApprovedPlugin}{SkipTopics} = '^(?:Sandbox|Main|System)\./';
 

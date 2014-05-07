@@ -11,6 +11,7 @@ use Foswiki::Sandbox ();
 
 use Foswiki::Plugins::KVPPlugin ();
 
+use Encode ();
 use File::Path;
 use File::Spec;
 
@@ -164,6 +165,7 @@ sub _generateApprovedPdfs {
             ($volume, $dirpart) = File::Spec->splitpath($mfn);
             File::Path::make_path($volume.$dirpart);
             open(my $mfh, '>', $mfn) or die "Can't open $mfn for writing: $!";
+            Encode::from_to($mtmpl, ($Foswiki::cfg{Site}{CharSet} || 'iso-8859-1'), ($Foswiki::cfg{ExportApprovedPlugin}{ExtraFilesCharSet} || 'windows-1252'));
             print $mfh $mtmpl;
             Foswiki::Func::popTopicContext();
         }
