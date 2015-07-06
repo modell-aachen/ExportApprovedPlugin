@@ -1,0 +1,32 @@
+%META:TOPICPARENT{name="Plugins"}%
+---+ !ExportApprovedPlugin
+
+%SHORTDESCRIPTION%
+
+---++ Plugin Preferences
+
+There are no global preferences for this plugin, but individual topics
+affected by it may use preferences to control how the topic is treated:
+
+   * EXPORT_AS_PDF: set to non-empty to export the topic; otherwise it is ignored
+   * PDF_LANDSCAPE: set to 1 to use landscape orientation when generating the PDF
+   * PDF_PAPERSIZE: set to A3 to use DIN A3 instead of A4
+
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
+
+---++ Installation
+%$INSTALL_INSTRUCTIONS%
+
+---++ Plugin Info
+
+|  Author: | Modell Aachen GmbH |
+|  Copyright: | &copy; 2014 Modell Aachen GmbH |
+|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
+|  Release: | %$RELEASE% |
+|  Version: | %$VERSION% |
+|  Change&nbsp;History: | <!-- versions below in reverse order -->&nbsp; |
+|  04 Apr 2014 (0.1) | Initial version |
+
