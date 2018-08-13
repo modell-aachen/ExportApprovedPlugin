@@ -165,7 +165,9 @@ sub _generateApprovedPdfs {
             ($volume, $dirpart) = File::Spec->splitpath($mfn);
             File::Path::make_path($volume.$dirpart);
             open(my $mfh, '>', $mfn) or die "Can't open $mfn for writing: $!";
-            Encode::from_to($mtmpl, ($Foswiki::cfg{Site}{CharSet} || 'iso-8859-1'), ($Foswiki::cfg{ExportApprovedPlugin}{ExtraFilesCharSet} || 'windows-1252'));
+            my $from_charset = $Foswiki::cfg{Site}{CharSet} || 'iso-8859-1';
+            my $to_charset = $Foswiki::cfg{ExportApprovedPlugin}{ExtraFilesCharSet} || 'windows-1252';
+            Encode::from_to($mtmpl, $from_charset, $to_charset) unless $from_charset eq $to_charset;
             print $mfh $mtmpl;
             Foswiki::Func::popTopicContext();
         }
